@@ -9,7 +9,7 @@ client.get(URL)  # sets cookie
 csrftoken = client.cookies['csrftoken']
 
 notification_data = {
-    'description': 'Here is a new description',
+    'description': 'This is a test',
     'mac_address': 'MM:MM:MM:SS:SS:SS',
     'csrfmiddlewaretoken': csrftoken
 }

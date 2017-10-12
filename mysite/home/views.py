@@ -44,7 +44,8 @@ class HomeView(View):
 
         # Sort the notifications under each device by date_created
         for device in devices:
-            device['notifications'] = sorted([notification['date_created'] for notification in device['notifications']])
+            #device['notifications'] = sorted([notification['date_created'] for notification in device['notifications']])
+            device['notifications'] = sorted(device['notifications'], key=lambda k: k['date_created'], reverse=True)
 
 
 

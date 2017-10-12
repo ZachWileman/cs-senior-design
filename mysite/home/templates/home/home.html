@@ -1,5 +1,6 @@
 {% extends "home/base.html" %}
 {% load static %}
+{% load tz %}
 
 {% block head_stylesheets %}
     <link rel="stylesheet" type="text/css" href="{% static "home/home.css" %}"/>
@@ -25,15 +26,15 @@
         </div>
     </div>
 
-    {{ devices }}
-
     <div class="notification-section">
         {% for device in devices %}
             <details>
                 <summary> {{ device.mac_address }} </summary>
-                {% for notifiation_info in device.notifications %}
-                    <li>{{ notification.date_created }} : {{ notification.description }}</li>
-                {% endfor %}
+                {% localtime on %}
+                    {% for notification in device.notifications %}
+                        <li>{{ notification.date_created }} : {{ notification.description }}</li>
+                    {% endfor %}
+                {% endlocaltime %}
             </details>
         {% endfor %}
     </div>
