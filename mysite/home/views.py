@@ -10,7 +10,7 @@ class HomeView(View):
 
     def get(self, request):
         """
-        This will display to the user the homepage/notifications.
+        This will display to the user the homepage/notifications. Should look something like this:
 
         devices = [
             {'mac_address': 'MM:MM:MM:SS:SS:SS',
@@ -44,21 +44,6 @@ class HomeView(View):
 
         # Sort the notifications under each device by date_created
         for device in devices:
-            #device['notifications'] = sorted([notification['date_created'] for notification in device['notifications']])
             device['notifications'] = sorted(device['notifications'], key=lambda k: k['date_created'], reverse=True)
-
-
-
-        # # Sorts the notifications by MAC address
-        # sorted_notifications_1 = {}
-        # for notification in all_notifications:
-        #     if notification.mac_address not in sorted_notifications_1:
-        #         sorted_notifications_1[notification.mac_address] = []
-        #     sorted_notifications_1[notification.mac_address].append((notification.date_created, notification.description))
-        #
-        # # Sorts the notifications by date_created
-        # sorted_notifications_2 = {}
-        # for mac_address in sorted_notifications_1:
-        #     sorted_notifications_2[mac_address] = sorted(sorted_notifications_1[mac_address], key=lambda tup: tup[0])
 
         return render(request, 'home/home.html', {'devices': devices})
