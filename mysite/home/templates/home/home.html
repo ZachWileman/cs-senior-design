@@ -1,0 +1,41 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block head_stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static "home/home.css" %}"/>
+{% endblock %}
+
+{% block head_javascript %}
+{% endblock %}
+
+{% block body_content %}
+    <div class="banner-container">
+        <div class="banner-item">
+            <h1>Homepage | Notifications</h1>
+        </div>
+        <div class="banner-item">
+            <a href="#">
+                Home
+            </a>
+        </div>
+        <div class="banner-item">
+            <a href="#">
+                Settings
+            </a>
+        </div>
+    </div>
+
+    {{ devices }}
+
+    <div class="notification-section">
+        {% for device in devices %}
+            <details>
+                <summary> {{ device.mac_address }} </summary>
+                {% for notifiation_info in device.notifications %}
+                    <li>{{ notification.date_created }} : {{ notification.description }}</li>
+                {% endfor %}
+            </details>
+        {% endfor %}
+    </div>
+
+{% endblock %}
