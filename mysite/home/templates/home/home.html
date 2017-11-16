@@ -26,13 +26,19 @@
         </div>
     </div>
 
+    <br>
     <div class="notification-section">
         {% for device in devices %}
             <details>
                 <summary> {{ device.mac_address }} </summary>
                 {% localtime on %}
                     {% for notification in device.notifications %}
-                        <li>{{ notification.date_created }} : {{ notification.description }}</li>
+                        <li>
+                            <br> Date Created: {{ notification.date_created }}
+                            <br> Description: {{ notification.description }}
+                            <br> Source Address: {{ notification.source_address }}
+                            <br> Threat Level: {{ notification.threat_level }}
+                        </li>
                     {% endfor %}
                 {% endlocaltime %}
             </details>

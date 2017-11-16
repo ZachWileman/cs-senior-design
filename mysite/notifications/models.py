@@ -35,5 +35,18 @@ class Notification(models.Model):
         max_length=17,
     )
 
+    source_address = models.GenericIPAddressField(
+        verbose_name=_('Source Address'),
+        help_text=_('The Source Address of the Attack.'),
+        null=True,
+    )
+
+    # Treat Levels: Low, Moderate, Severe
+    threat_level = models.CharField(
+        verbose_name=_('Threat Level'),
+        help_text=_('The Threat Level of the Attack.'),
+        max_length=50,
+    )
+
     def __str__(self):
         return 'MAC: {},  Description: {}'.format(self.mac_address, self.description)

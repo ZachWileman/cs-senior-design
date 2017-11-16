@@ -11,7 +11,9 @@ csrftoken = client.cookies['csrftoken']
 notification_data = {
     'description': 'This is a test',
     'mac_address': 'MM:MM:MM:SS:SS:SS',
-    'csrfmiddlewaretoken': csrftoken
+    'source_address': '123.123.123.123',
+    'threat_level': 'Severe',
+    'csrfmiddlewaretoken': csrftoken,
 }
 
 r = client.post(URL, data=notification_data)
