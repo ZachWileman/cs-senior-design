@@ -1,10 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 import uuid
-from settings.models import Attack
+# from settings.models import Attack
 
-
-#Attack = 'settings.Attack'
 
 class Notification(models.Model):
     """
@@ -26,9 +24,7 @@ class Notification(models.Model):
         editable=False,
     )
 
-    attack = models.ForeignKey(
-        Attack,
-        on_delete=models.CASCADE,
+    attack = models.CharField(
         verbose_name=_('Attack'),
         help_text=_('An object that represents the Attack.'),
         max_length=50,

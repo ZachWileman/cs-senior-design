@@ -35,7 +35,7 @@
                     {% for notification in device.notifications %}
                         <li>
                             <br> Date Created: {{ notification.date_created }}
-                            <br> Description: {{ notification.attack }}
+                            <br> Attack: {{ notification.attack }}
                             <br> Source Address: {{ notification.source_address }}
                             <br> Threat Level: {{ notification.threat_level }}
                         </li>

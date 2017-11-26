@@ -15,11 +15,10 @@ class HomeView(View):
         devices = [
             {'mac_address': 'MM:MM:MM:SS:SS:SS',
             'notifications': [
-                {'date_created': 'some date', 'description': 'this is the description', 'threat_level': 'Severe', 'source_address': '190.123.123.123'},
-                {'date_created': 'another date', 'description': 'another one', 'threat_level': 'Moderate', 'source_address': None}]
+                {'date_created': 'some date', 'attack': 'SYN Flood Attack', 'threat_level': 'Severe', 'source_address': '190.123.123.123'},
+                {'date_created': 'another date', 'attack': 'Christmas Tree Attack', 'threat_level': 'Moderate', 'source_address': None}]
             },
         ]
-
         """
         # Grab the collection of notifications from the database
         all_notifications = Notification.objects.all()
