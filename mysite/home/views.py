@@ -35,7 +35,7 @@ class HomeView(View):
         for notification in all_notifications:
             for device in devices:
                 if notification.mac_address == device['mac_address']:
-                    device['notifications'].append({'description': notification.description, 'date_created': notification.date_created,
+                    device['notifications'].append({'attack': notification.attack, 'date_created': notification.date_created,
                                                     'threat_level': notification.threat_level, 'source_address': notification.source_address})
 
         # Sort the notifications under each device by date_created

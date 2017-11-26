@@ -11,7 +11,7 @@ class SubmitNotificationView(View):
     as well as display on the home page in the notifications.
     """
     def get(self, request):
-        return render(request, 'notifications/submit_notification.html', {'form': NotificationForm})
+        return render(request, 'notifications/submit_form.html', {'form': NotificationForm})
 
     def post(self, request):
         """

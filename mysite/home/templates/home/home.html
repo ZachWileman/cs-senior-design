@@ -15,12 +15,12 @@
             <h1>Homepage | Notifications</h1>
         </div>
         <div class="banner-item">
-            <a href="#">
+            <a href="{% url 'home:homepage' %}">
                 Home
             </a>
         </div>
         <div class="banner-item">
-            <a href="#">
+            <a href="{% url 'settings:settings-page' %}">
                 Settings
             </a>
         </div>
@@ -35,7 +35,7 @@
                     {% for notification in device.notifications %}
                         <li>
                             <br> Date Created: {{ notification.date_created }}
-                            <br> Description: {{ notification.description }}
+                            <br> Description: {{ notification.attack }}
                             <br> Source Address: {{ notification.source_address }}
                             <br> Threat Level: {{ notification.threat_level }}
                         </li>
