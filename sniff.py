@@ -59,4 +59,4 @@ def send_notification(attack, dst, src, threat_level):
     print(r.text)
 
 if __name__ == '__main__':
-    sniff(prn=detection, filter='tcp' store=0)
+    sniff(prn=detection, filter='tcp', store=0)
