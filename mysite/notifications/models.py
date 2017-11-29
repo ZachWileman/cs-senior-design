@@ -30,10 +30,9 @@ class Notification(models.Model):
         max_length=50,
     )
 
-    mac_address = models.CharField(
-        verbose_name=_('MAC Address'),
-        help_text=_('The MAC Address of the device on the network.'),
-        max_length=17,
+    dest_address = models.GenericIPAddressField(
+        verbose_name=_('Destination Address'),
+        help_text=_('The Destination Address of the device on the network.'),
     )
 
     source_address = models.GenericIPAddressField(

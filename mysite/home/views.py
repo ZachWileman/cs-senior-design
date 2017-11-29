@@ -13,7 +13,7 @@ class HomeView(View):
         This will display to the user the homepage/notifications. Should look something like this:
 
         devices = [
-            {'mac_address': 'MM:MM:MM:SS:SS:SS',
+            {'dest_address': 'MM:MM:MM:SS:SS:SS',
             'notifications': [
                 {'date_created': 'some date', 'attack': 'SYN Flood Attack', 'threat_level': 'Severe', 'source_address': '190.123.123.123'},
                 {'date_created': 'another date', 'attack': 'Christmas Tree Attack', 'threat_level': 'Moderate', 'source_address': None}]
@@ -27,13 +27,13 @@ class HomeView(View):
 
         # Create a list of devices using each of the mac addresses
         for notification in all_notifications:
-            if notification.mac_address not in [device['mac_address'] for device in devices]:
-                devices.append({'mac_address': notification.mac_address, 'notifications': []})
+            if notification.dest_address not in [device['dest_address'] for device in devices]:
+                devices.append({'dest_address': notification.dest_address, 'notifications': []})
 
         # Add the notifications to their respective device
         for notification in all_notifications:
             for device in devices:
-                if notification.mac_address == device['mac_address']:
+                if notification.dest_address == device['dest_address']:
                     device['notifications'].append({'attack': notification.attack, 'date_created': notification.date_created,
                                                     'threat_level': notification.threat_level, 'source_address': notification.source_address})
 

@@ -9,8 +9,8 @@ client.get(URL)  # sets cookie
 csrftoken = client.cookies['csrftoken']
 
 notification_data = {
-    'attack': 'SYN Flood Attack',
-    'mac_address': 'MM:MM:MM:SS:SS:SS',
+    'attack': 'Christmas Tree Attack',
+    'dest_address': '123.12.32.12',
     'source_address': '123.123.123.123',
     'threat_level': 'Severe',
     'csrfmiddlewaretoken': csrftoken,

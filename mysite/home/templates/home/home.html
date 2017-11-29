@@ -30,7 +30,7 @@
     <div class="notification-section">
         {% for device in devices %}
             <details>
-                <summary> {{ device.mac_address }} </summary>
+                <summary> {{ device.dest_address }} </summary>
                 {% localtime on %}
                     {% for notification in device.notifications %}
                         <li>
