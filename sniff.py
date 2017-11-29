@@ -2,28 +2,61 @@
 import logging
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
+import requests
 
-#counter = 0
+ct_packets = 0
+ct_source_add_counter = 0
+sf_packets = 0
+sf_source_add_counter = 0
 
-def sniff_packets(packet):
-    #global counter
-    #counter += 1
-    # print('Packet #{}: {} ==> {}'.format(counter, packet[0][1].src, packet[0][1].dst))
+def detection(pkt):
+    global ct_packets
+    global ct_source_add_counter
+    global sf_packets
+    global sf_source_add_counter
 
-    if IP in packet:
-        ip_src = packet[IP].src
-        ip_dst = packet[IP].dst
+    F = pkt.sprintf('%TCP.flags%')
+    Dst = pkt.sprintf('%IP.dst%')
+    Src = pkt.sprintf('%IP.src%')
 
-        # you can filter with something like that
-        if packet[IP].src == "192.168.0.1" or packet[IP].dst == "192.168.0.1":
-            print("!")
-            
-    if TCP in packet:
-        tcp_sport = packet[TCP].sport
-        tcp_dport = packet[TCP].dport
+    # Checks if there are the correct flags shown for the Xmas Attack
+    if F == "FPU":
+        ct_packets += 1
 
-        print ("IP src: {}, TCP source port: {}".format(ip_src, tcp_sport))
-        print ("IP dst: {}, TCP destination port: {}".format(ip_dst, tcp_dport))
+        if ct_packets == 50:
+            ct_packets = 0
+            print('Christmas Tree Attack detected.')
+            send_notification('Christmas Tree Attack', Dst, Src, 'Moderate')
+
+    # Checks if there are the correct flags shown for the Xmas Attack
+    if F == "SA":
+        sf_packets += 1
+
+        if sf_packets == 50:
+            sf_packets = 0
+            print('SYN Flood Attack detected.')
+            send_notification('SYN Flood Attack', Dst, Src, 'Severe')
 
 
-sniff(prn=sniff_packets, store=0)
+def send_notification(attack, dst, src, threat_level):
+    URL = 'http://localhost:8000/notifications/'
+
+    client = requests.session()
+
+    # Retrieve the CSRF token first
+    client.get(URL)  # sets cookie
+    csrftoken = client.cookies['csrftoken']
+
+    notification_data = {
+        'attack': 'Christmas Tree Attack',
+        'dest_address': '123.12.32.12',
+        'source_address': '123.123.123.123',
+        'threat_level': 'Severe',
+        'csrfmiddlewaretoken': csrftoken,
+    }
+
+    r = client.post(URL, data=notification_data)
+    print(r.text)
+
+if __name__ == '__main__':
+    sniff(prn=detection, filter='tcp' store=0)
