@@ -48,10 +48,10 @@ def send_notification(attack, dst, src, threat_level):
     csrftoken = client.cookies['csrftoken']
 
     notification_data = {
-        'attack': 'Christmas Tree Attack',
-        'dest_address': '123.12.32.12',
-        'source_address': '123.123.123.123',
-        'threat_level': 'Severe',
+        'attack': attack,
+        'dest_address': dst,
+        'source_address': src,
+        'threat_level': threat_level,
         'csrfmiddlewaretoken': csrftoken,
     }
 
