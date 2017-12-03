@@ -1,0 +1,53 @@
+{% extends "settings/base.html" %}
+{% load static %}
+{% load tz %}
+
+{% block head_stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static "home/home.css" %}"/>
+{% endblock %}
+
+{% block head_javascript %}
+{% endblock %}
+
+{% block body_content %}
+    <div class="banner-container">
+        <div class="banner-item">
+            <h1>Settings</h1>
+        </div>
+        <div class="banner-item">
+            <a href="{%url 'home:homepage'%}">
+                Home
+            </a>
+        </div>
+        <div class="banner-item">
+            <a href="{%url 'settings:settings-view'%}">
+                Settings
+            </a>
+        </div>
+    </div>
+    <div class="Settings">
+    <p class="h1">Setting Page</p>
+        <table class="table table-hover table-bordered">
+            <th bgcolor="#d3d3d3">Attack Name</th>
+            <th bgcolor="#d3d3d3">Status</th>
+            <tr>
+                <td>Christmas Tree</td>
+                <td>
+                    <div class="btn-group" role="christmas" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary">On</button>
+                        <button type="button" class="btn btn-secondary">Off</button>
+                    </div>
+                </td>
+            </tr>
+                        <tr>
+                <td>Flood</td>
+                <td>
+                    <div class="btn-group" role="flood" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary">On</button>
+                        <button type="button" class="btn btn-secondary">Off</button>
+                    </div>
+                </td>
+            </tr>
+</div>
+    </div>
+{% endblock %}
