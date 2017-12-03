@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 import uuid
-# from settings.models import Attack
 
 
 class Notification(models.Model):
@@ -24,35 +23,16 @@ class Notification(models.Model):
         editable=False,
     )
 
-    attack = models.CharField(
-        verbose_name=_('Attack'),
-        help_text=_('An object that represents the Attack.'),
-        max_length=50,
+    description = models.CharField(
+        verbose_name=_('Description'),
+        help_text=_('The description of the notification.'),
+        max_length=1000,
     )
 
-    dest_address = models.GenericIPAddressField(
-        verbose_name=_('Destination Address'),
-        help_text=_('The Destination Address of the device on the network.'),
-    )
-
-    source_address = models.GenericIPAddressField(
-        verbose_name=_('Source Address'),
-        help_text=_('The specific source address of the attack (if one exists).'),
-        null=True,
-        blank=True,
-    )
-
-    THREAT_LEVELS = (
-        ('Low', 'Low'),
-        ('Moderate', 'Moderate'),
-        ('Severe', 'Severe'),
-    )
-
-    threat_level = models.CharField(
-        verbose_name=_('Threat Level'),
-        help_text=_('The Threat Level of the Attack.'),
-        max_length=8,
-        choices=THREAT_LEVELS,
+    mac_address = models.CharField(
+        verbose_name=_('MAC Address'),
+        help_text=_('The MAC Address of the device on the network.'),
+        max_length=17,
     )
 
     def __str__(self):

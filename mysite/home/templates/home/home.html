@@ -1,4 +1,6 @@
+
 {% extends "home/base.html" %}
+
 {% load static %}
 {% load tz %}
 
@@ -15,34 +17,92 @@
             <h1>Homepage | Notifications</h1>
         </div>
         <div class="banner-item">
-            <a href="{% url 'home:homepage' %}">
+            <a href="{%url 'home:homepage' %}">
                 Home
             </a>
         </div>
         <div class="banner-item">
-            <a href="{% url 'settings:settings-page' %}">
+            <a href="{%url 'settings:settings-view'%}">
                 Settings
             </a>
         </div>
     </div>
+    <div class="notification-table">
+    <table class="table table-hover table-bordered">
+        <th bgcolor="#d3d3d3">Source</th>
+        <th bgcolor="#d3d3d3">Destination Address</th>
+        <th bgcolor="#d3d3d3">Description</th>
+        <th bgcolor="#d3d3d3">Time</th>
+        <th bgcolor="#d3d3d3">Treat Level</th>
+        <tr>
+            <td>12315.213</td>
+            <td>MM:MM:MM:SS:SS:SS</td>
+            <td>String</td>
+            <td>Oct. 12, 2017, 1:10 a.m.</td>
+            <td>None</td>
+        </tr>
+        <tr>
+            <td>12315.213</td>
+            <td>MM:MM:MM:SS:SS:SS</td>
+            <td>String</td>
+            <td>Oct. 12, 2017, 1:10 a.m.</td>
+            <td>None</td>
+        </tr>
+        <tr class="danger">
+            <td>12315.213</td>
+            <td>MM:MM:MM:SS:SS:SS</td>
+            <td>String</td>
+            <td>Oct. 12, 2017, 1:10 a.m.</td>
+            <td>High</td>
+        </tr>
+            <tr class="danger">
+            <td>12315.213</td>
+            <td>MM:MM:MM:SS:SS:SS</td>
+            <td>String</td>
+            <td>Oct. 12, 2017, 1:10 a.m.</td>
+            <td>High</td>
+        </tr>
+            <tr class="danger">
+            <td>12315.213</td>
+            <td>MM:MM:MM:SS:SS:SS</td>
+            <td>String</td>
+            <td>Oct. 12, 2017, 1:10 a.m.</td>
+            <td>High</td>
+        </tr>
+            <tr class="danger">
+            <td>12315.213</td>
+            <td>MM:MM:MM:SS:SS:SS</td>
+            <td>String</td>
+            <td>Oct. 12, 2017, 1:10 a.m.</td>
+            <td>High</td>
+        </tr>    <tr class="danger">
+            <td>12315.213</td>
+            <td>MM:MM:MM:SS:SS:SS</td>
+            <td>String</td>
+            <td>Oct. 12, 2017, 1:10 a.m.</td>
+            <td>High</td>
+        </tr>    <tr class="danger">
+            <td>12315.213</td>
+            <td>MM:MM:MM:SS:SS:SS</td>
+            <td>String</td>
+            <td>Oct. 12, 2017, 1:10 a.m.</td>
+            <td>High</td>
+        </tr>    <tr class="danger">
+            <td>12315.213</td>
+            <td>MM:MM:MM:SS:SS:SS</td>
+            <td>String</td>
+            <td>Oct. 12, 2017, 1:10 a.m.</td>
+            <td>High</td>
+        {% for notification in notifications %}
+            <tr>
+                <td> 11.123.123</td>
+                <td>{{ notification.mac_address}}</td>
+                <td>String</td>
+                <td>{{ notification.date_created }}</td>
+                <td>None</td>
+            </tr>
+         {% endfor %}
+    </table>
 
-    <br>
-    <div class="notification-section">
-        {% for device in devices %}
-            <details>
-                <summary> {{ device.dest_address }} </summary>
-                {% localtime on %}
-                    {% for notification in device.notifications %}
-                        <li>
-                            <br> Date Created: {{ notification.date_created }}
-                            <br> Attack: {{ notification.attack }}
-                            <br> Source Address: {{ notification.source_address }}
-                            <br> Threat Level: {{ notification.threat_level }}
-                        </li>
-                    {% endfor %}
-                {% endlocaltime %}
-            </details>
-        {% endfor %}
     </div>
-
 {% endblock %}

@@ -13,32 +13,20 @@ class HomeView(View):
         This will display to the user the homepage/notifications. Should look something like this:
 
         devices = [
-            {'dest_address': 'MM:MM:MM:SS:SS:SS',
+            {'mac_address': 'MM:MM:MM:SS:SS:SS',
             'notifications': [
-                {'date_created': 'some date', 'attack': 'SYN Flood Attack', 'threat_level': 'Severe', 'source_address': '190.123.123.123'},
-                {'date_created': 'another date', 'attack': 'Christmas Tree Attack', 'threat_level': 'Moderate', 'source_address': None}]
+                {'date_created': 'some date', 'description': 'this is the description'},
+                {'date_created': 'another date', 'description': 'another one'}]
+            },
+            {'mac_address': 'AA:AA:AA:BB:BB:BB',
+            'notifications': [
+                {'date_created': '12345', 'description': 'this is the description'},
+                {'date_created': '67891', 'description': 'another one'}]
             },
         ]
+
         """
-        # Grab the collection of notifications from the database
+        # Grab the collection of notifications from the database """
         all_notifications = Notification.objects.all()
 
-        devices = []
-
-        # Create a list of devices using each of the mac addresses
-        for notification in all_notifications:
-            if notification.dest_address not in [device['dest_address'] for device in devices]:
-                devices.append({'dest_address': notification.dest_address, 'notifications': []})
-
-        # Add the notifications to their respective device
-        for notification in all_notifications:
-            for device in devices:
-                if notification.dest_address == device['dest_address']:
-                    device['notifications'].append({'attack': notification.attack, 'date_created': notification.date_created,
-                                                    'threat_level': notification.threat_level, 'source_address': notification.source_address})
-
-        # Sort the notifications under each device by date_created
-        for device in devices:
-            device['notifications'] = sorted(device['notifications'], key=lambda k: k['date_created'], reverse=True)
-
-        return render(request, 'home/home.html', {'devices': devices})
+        return render(request, 'home/home.html', {'notifications': all_notifications})
