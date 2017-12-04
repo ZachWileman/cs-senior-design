@@ -12,41 +12,45 @@
 {% block body_content %}
     <div class="banner-container">
         <div class="banner-item">
-            <h1>Homepage | Notifications</h1>
+            <h1>Settings</h1>
         </div>
         <div class="banner-item">
-            <a href="{% url 'home:homepage' %}">
+            <a href="{%url 'home:homepage'%}">
                 Home
             </a>
         </div>
         <div class="banner-item">
-            <a href="{% url 'settings:settings-page' %}">
+            <a href="{%url 'settings:settings-page'%}">
                 Settings
             </a>
         </div>
     </div>
-
-    <br>
-    <div>
-        <form action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-
-            <!-- Loop through the different Attacks -->
+    <div class="Settings">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table class="table table-hover table-bordered">
+            <th bgcolor="#d3d3d3">Attack Name</th>
+            <th bgcolor="#d3d3d3">Status</th>
             {% for attack in attacks %}
-
-                <!-- Print out each Attack with a checkbox for turning on/off its detection status -->
+                <tr>
+                <td>
+                    {{ attack.name }}
+                </td>
+                <td><!-- Print out each Attack with a checkbox for turning on/off its detection status -->
                 {% if attack.detection is True %}
-                    <input type="checkbox" name="{{ attack.name }}" checked> {{ attack.name }}
+                    <input type="checkbox" name="{{ attack.name }}" checked>
                 {% else %}
-                    <input type="checkbox" name="{{ attack.name }}"> {{ attack.name }}
+                    <input type="checkbox" name="{{ attack.name }}">
                 {% endif %}
-                <br>
-
+                </td>
+                </tr>
             {% endfor %}
-
-            <br><input name="submit-settings" type="submit" value="UPDATE">
-        </form>
-        <br>
-    </div>
-
+        </table>
+    <tr>
+        <td></td>
+        <td>
+            <input class="btn btn-primary btn-lg" name="submit-settings" type="submit" value="UPDATE">
+        </td>
+    </tr>
+    </form>
 {% endblock %}
