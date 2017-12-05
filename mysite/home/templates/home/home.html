@@ -1,6 +1,4 @@
-
 {% extends "home/base.html" %}
-
 {% load static %}
 {% load tz %}
 
@@ -17,35 +15,34 @@
             <h1>Homepage | Notifications</h1>
         </div>
         <div class="banner-item">
-            <a href="{%url 'home:homepage' %}">
+            <a href="{% url 'home:homepage' %}">
                 Home
             </a>
         </div>
         <div class="banner-item">
-            <a href="{%url 'settings:settings-page'%}">
+            <a href="{% url 'settings:settings-page' %}">
                 Settings
             </a>
         </div>
     </div>
-    <div class="notification-table">
 
-    <table class="table table-hover table-bordered">
-        <th bgcolor="#d3d3d3">Date Created</th>
-        <th bgcolor="#d3d3d3">Attack</th>
-        <th bgcolor="#d3d3d3">Source Address</th>
-        <th bgcolor="#d3d3d3">Threat Level</th>
-        {% for notification in notifications %}
-            {% if notification.threat_level == "Severe" %}
-                <tr class="danger">
-            {% else %}
-                <tr>
-            {% endif %}
-                <td> {{ notification.date_created }} </td>
-                <td> {{ notification.attack }}</td>
-                <td> {{ notification.source_address }}</td>
-                <td> {{ notification.threat_level }}</td>
-            </tr>
+    <br>
+    <div class="notification-section">
+        {% for device in devices %}
+            <details>
+                <summary> {{ device.dest_address }} </summary>
+                {% localtime on %}
+                    {% for notification in device.notifications %}
+                        <li>
+                            <br> Date Created: {{ notification.date_created }}
+                            <br> Attack: {{ notification.attack }}
+                            <br> Source Address: {{ notification.source_address }}
+                            <br> Threat Level: {{ notification.threat_level }}
+                        </li>
+                    {% endfor %}
+                {% endlocaltime %}
+            </details>
         {% endfor %}
-    </table>
     </div>
+
 {% endblock %}

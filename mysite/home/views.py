@@ -23,4 +23,22 @@ class HomeView(View):
         # Grab the collection of notifications from the database
         all_notifications = Notification.objects.all()
 
-        return render(request, 'home/home.html', {'notifications': all_notifications})
+        devices = []
+
+        # Create a list of devices using each of the mac addresses
+        for notification in all_notifications:
+            if notification.dest_address not in [device['dest_address'] for device in devices]:
+                devices.append({'dest_address': notification.dest_address, 'notifications': []})
+
+        # Add the notifications to their respective device
+        for notification in all_notifications:
+            for device in devices:
+                if notification.dest_address == device['dest_address']:
+                    device['notifications'].append({'attack': notification.attack, 'date_created': notification.date_created,
+                                                    'threat_level': notification.threat_level, 'source_address': notification.source_address})
+
+        # Sort the notifications under each device by date_created
+        for device in devices:
+            device['notifications'] = sorted(device['notifications'], key=lambda k: k['date_created'], reverse=True)
+
+        return render(request, 'home/home.html', {'devices': devices})
