@@ -1,14 +1,9 @@
+import logging
+logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
-from scapy.arch.windows import compatibility
-from scapy.all import log_runtime, MTU, ETH_P_ALL, PcapTimeoutElapsed, plist
-compatibility.log_runtime = log_runtime
-compatibility.MTU = MTU
-compatibility.PcapTimeoutElapsed = PcapTimeoutElapsed
-compatibility.ETH_P_ALL = ETH_P_ALL
-compatibility.plist = plist
 from random import randint
 
-BBB = "192.168.7.2"
+BBB = "192.168.1.127"
 #Skeleton TCP packet with IP set to the BBB
 skeleton_packet = IP(dst=BBB)/TCP()
 
